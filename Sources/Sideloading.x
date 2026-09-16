@@ -99,12 +99,12 @@ static BOOL isSelfCall(void)
     if (!isSelfCall())
         return %orig;
 
-    NSDictionary *origDict = %orig;
-    NSMutableDictionary *info = [NSMutableDictionary dictionaryWithDictionary:origDict];
+    NSDictionary *orig = %orig;
+    NSMutableDictionary *info = [[NSMutableDictionary alloc] initWithDictionary:orig];
     info[@"CFBundleIdentifier"]  = DISCORD_BUNDLE_ID;
     info[@"CFBundleDisplayName"] = DISCORD_NAME;
     info[@"CFBundleName"]        = DISCORD_NAME;
-    return info;
+    return [info autorelease];
 }
 
 - (id)objectForInfoDictionaryKey:(NSString *)key
